@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.activity_timer.*
 import java.util.*
 import android.media.ToneGenerator
 import android.media.AudioManager
-
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 
 
 class TimerActivity : AppCompatActivity(), View.OnClickListener {
@@ -84,6 +85,7 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
         if (startTime == DEFAULT_START_TIME) {
             clock.text = "0"
             clock.setTextColor(grey!!)
+            minutes.visibility = INVISIBLE
         } else {
             val now = Date().time
             val mins: Int = ((now - startTime) / 1000 / 60).toInt()
@@ -94,7 +96,8 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
                 0 -> if (mins > 0) tg?.startTone(ToneGenerator.TONE_CDMA_ABBR_ALERT, 300)
                 57, 58, 59 -> tg?.startTone(ToneGenerator.TONE_CDMA_PIP, 100)
             }
-
+            minutes.visibility = VISIBLE
+            minutes.text = getString(R.string.minutes, mins)
             handler.postDelayed({ updateClock() }, 1000)
         }
     }

@@ -18,6 +18,17 @@
         tools:text="59"/>
 
     <TextView
+        android:id="@+id/minutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/grey"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
+        android:padding="16dp"
+        tools:text="Minutes Completed: 0"/>
+
+    <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
