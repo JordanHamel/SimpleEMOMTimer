@@ -62,7 +62,7 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun stopTimer() {
         startTime = DEFAULT_START_TIME
-        handler.removeCallbacks(null)
+        handler.removeCallbacksAndMessages(null)
         updateUi()
     }
 
