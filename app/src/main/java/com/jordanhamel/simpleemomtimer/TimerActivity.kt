@@ -1,6 +1,7 @@
 package com.jordanhamel.simpleemomtimer
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -16,11 +17,15 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
     var DEFAULT_START_TIME : Long = -1
     var startTime : Long = DEFAULT_START_TIME
     var handler = Handler()
+    var grey : Int? = null
+    var black : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
         button.setOnClickListener(this)
+        grey = resources.getColor(R.color.grey)
+        black = resources.getColor(android.R.color.black)
     }
 
     override fun onResume() {
@@ -70,10 +75,12 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateClock() {
         if (startTime == DEFAULT_START_TIME) {
             clock.text = "0"
+            clock.setTextColor(grey!!)
         } else {
             val now = Date().time
             val secs: Int = ((now - startTime) / 1000 % 60).toInt()
             clock.text = "$secs"
+            clock.setTextColor(black!!)
             handler.postDelayed({ updateClock() }, 1000)
         }
     }
