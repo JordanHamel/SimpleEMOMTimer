@@ -1,7 +1,6 @@
 package com.jordanhamel.simpleemomtimer
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -65,10 +64,10 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateButton() {
         if (startTime == DEFAULT_START_TIME) {
             button.setText(R.string.start)
-            button.setBackgroundResource(android.R.color.holo_green_dark)
+            button.setBackgroundResource(R.drawable.button_green)
         } else {
             button.setText(R.string.stop)
-            button.setBackgroundResource(android.R.color.holo_red_dark)
+            button.setBackgroundResource(R.drawable.button_red)
         }
     }
 
