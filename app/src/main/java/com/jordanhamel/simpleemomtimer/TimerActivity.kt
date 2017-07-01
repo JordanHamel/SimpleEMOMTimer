@@ -8,6 +8,10 @@ import android.view.View
 
 import kotlinx.android.synthetic.main.activity_timer.*
 import java.util.*
+import android.media.ToneGenerator
+import android.media.AudioManager
+
+
 
 class TimerActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,6 +22,7 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
     var handler = Handler()
     var grey : Int? = null
     var black : Int? = null
+    var tg : ToneGenerator? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,15 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
         super.onResume()
         startTime = getSavedStartTime()
         updateUi()
+        tg = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
     }
 
     override fun onPause() {
         super.onPause()
         saveStartTime()
         handler.removeCallbacks(null)
+        tg?.release()
+        tg = null
     }
 
     override fun onClick(v: View) {
@@ -77,9 +85,15 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
             clock.setTextColor(grey!!)
         } else {
             val now = Date().time
+            val mins: Int = ((now - startTime) / 1000 / 60).toInt()
             val secs: Int = ((now - startTime) / 1000 % 60).toInt()
             clock.text = "$secs"
             clock.setTextColor(black!!)
+            when (secs) {
+                0 -> if (mins > 0) tg?.startTone(ToneGenerator.TONE_CDMA_ABBR_ALERT, 300)
+                57, 58, 59 -> tg?.startTone(ToneGenerator.TONE_CDMA_PIP, 100)
+            }
+
             handler.postDelayed({ updateClock() }, 1000)
         }
     }
