@@ -27,6 +27,7 @@ class TimerActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
+        volumeControlStream = AudioManager.STREAM_MUSIC
         button.setOnClickListener(this)
         grey = resources.getColor(R.color.grey)
         black = resources.getColor(android.R.color.black)
