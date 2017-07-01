@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Simple EMOM Timer</string>
+    <string name="app_name">EMOM Timer</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="minutes">Minutes Completed: %d</string>
